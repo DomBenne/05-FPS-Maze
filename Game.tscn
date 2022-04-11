@@ -1,9 +1,13 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Key/key.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Exit/Exit.gd" type="Script" id=3]
 [ext_resource path="res://UI/Menu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemy/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/341695__projectsu012__coins-1.wav" type="AudioStream" id=6]
+[ext_resource path="res://Assets/315844__gneube__zombie-snarl.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/The Biggest Discovery.ogg" type="AudioStream" id=8]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 100, 50 )
@@ -111,6 +115,34 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 3, 0 )
 shape = SubResource( 12 )
 
+[node name="CSGBox" type="CSGBox" parent="Maze"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -1.5 )
+use_collision = true
+width = 1.0
+height = 6.0
+depth = 47.0
+
+[node name="CSGBox2" type="CSGBox" parent="Maze"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.699, 3, 2.23818 )
+use_collision = true
+width = 1.0
+height = 6.0
+depth = 50.0
+
+[node name="CSGBox3" type="CSGBox" parent="Maze"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 22.17, 3, 0 )
+use_collision = true
+width = 1.0
+height = 6.0
+depth = 50.0
+
+[node name="CSGSphere" type="CSGSphere" parent="Maze/CSGBox3"]
+operation = 2
+radius = 3.0
+
+[node name="Enemy" parent="." instance=ExtResource( 5 )]
+transform = Transform( -0.1, 0, -0.173205, 0, 0.2, 0, 0.173205, 0, -0.1, 43.8191, 0.155926, 19.219 )
+
 [node name="Player" type="KinematicBody" parent="."]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -43.3659, 0.838263, 0 )
 script = ExtResource( 1 )
@@ -128,6 +160,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="Camera" type="Camera" parent="Player/Pivot"]
 current = true
+
+[node name="Music" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+
+[node name="Key" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Zombie" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 7 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
